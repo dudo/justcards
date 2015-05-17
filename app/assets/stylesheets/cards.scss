@@ -1,0 +1,78 @@
+// Place all the styles related to the cards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html {
+  height: 100%;
+}
+body {
+  background-color: darkgreen;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+#table {
+  margin: 20px;
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+}
+.card-wrapper{
+  perspective: 800px;
+  width: 200px;
+  height: 260px;
+  position: relative;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+
+  .card-face {
+    .h {
+      float: left;
+    }
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+.card-face {
+  background-color: white;
+  .rotate {
+    position: absolute;
+    height: 20%;
+    width: 20%;
+  }
+  .rotate:nth-child(1) {
+    top: 0;
+    left: 0;
+  }
+  .rotate:nth-child(2) {
+    top: 0;
+    right: 0;
+  }
+  .rotate:nth-child(3) {
+    bottom: 0;
+    right: 0;
+  }
+  .rotate:nth-child(4) {
+    bottom: 0;
+    left: 0;
+  }
+}
+.front {
+  backface-visibility: hidden;
+  background-color: blue;
+}
+.back {
+  backface-visibility: hidden;
+  transform: rotateY(-180deg);
+  background-color: red;
+}
