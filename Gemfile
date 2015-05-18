@@ -42,3 +42,8 @@ group :development, :test do
   gem "letter_opener"
 end
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+  gem 'rails_serve_static_assets'
+end
