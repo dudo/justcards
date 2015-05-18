@@ -1,0 +1,2 @@
+class Front < Face
+end

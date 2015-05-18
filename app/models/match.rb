@@ -5,5 +5,5 @@ class Match < ActiveRecord::Base
   has_many :players
   has_many :users, through: :players
 
-  has_many :plays, as: :playable
+  has_many :plays, as: :holdable
 end

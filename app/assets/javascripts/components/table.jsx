@@ -9,8 +9,8 @@ class Table {
   render() {
     return (
       <div id='table'>
-        {[0,1,2,3,4,5,6,1,2,3,4,5,0,1,2,3,4,5].map( v =>
-          <Card faceUp={false} />
+        { this.props.data.map( c =>
+          <Card {...c} />
         )}
       </div>
     );

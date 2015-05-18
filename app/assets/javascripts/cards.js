@@ -12,11 +12,10 @@ $(document).ready(function() {
 
     var R = Draggable.create(this, {
       type: 'rotation',
-      trigger: handle,
-      onClick: function(event){ flip(card) }
+      trigger: handle
     })[0].disable();
 
-    Draggable.create(this, {
+    var M = Draggable.create(this, {
       type: 'x,y',
       cursor: 'grab',
       bounds: '#table',
@@ -26,10 +25,12 @@ $(document).ready(function() {
 
     handle.mousedown(function(event) {
       $(this).parents('.card-wrapper').css('z-index', Draggable.zIndex++);
-      event.stopPropagation();
-      R.enable().startDrag(event);
-    }).mouseup(function() {
-      R.disable();
+      $(document).mousemove(function(event) {
+        M.disable(); R.enable().startDrag(event);
+      });
+    })
+    $(document).mouseup(function() {
+      R.disable(); M.enable(); $(document).unbind('mousemove');
     });
 
   });

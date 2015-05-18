@@ -1,0 +1,2 @@
+class Back < Face
+end
