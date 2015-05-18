@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 gem 'rails', '4.2.0' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sqlite3' # Use sqlite3 as the database for Active Record
 gem 'sprockets'
 gem 'sprockets-es6', require: 'sprockets/es6'
 # gem 'thin'
@@ -36,6 +35,7 @@ gem 'smart_listing' # this is amazing for lists, includes kaminari pagination
 # gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 
 group :development, :test do
+  gem 'sqlite3' # Use sqlite3 as the database for Active Record
   gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'web-console', '~> 2.0' # Access an IRB console on exception pages or by using <%= console %> in views
   # gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
