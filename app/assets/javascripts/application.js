@@ -15,7 +15,6 @@
 //= require 'greensock/TweenMax'
 //= require 'greensock/TimelineLite'
 //= require 'greensock/utils/Draggable'
-//= require 'greensock/jquery.gsap.js'
 //= require turbolinks
 //= require react
 //= require react_ujs

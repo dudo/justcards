@@ -8,21 +8,24 @@ class Card {
     if (this.props.faceUp) { cardClass += ' face-up'; }
     var cardFrontUrl = "url('/assets/"+ this.props.name +".png')"
     var cardBackUrl = "url('/assets/back.png')"
+    var bs = this.props.width_px + 'px ' + this.props.height_px + 'px'
+    var br = this.props.border_radius_px + 'px'
+
     return (
-      <div className='card-wrapper' style={{width: '185px', height: '260px'}}>
-        <div className={cardClass}>
-          <div className='card-face front'
-               style={{background: cardFrontUrl, backgroundSize: '185px 260px', borderRadius: '10px'}}>
-            {[0,1,2,3].map( v =>
-              <span className={'rotate'}></span>
-            )}
-          </div>
-          <div className='card-face back'
-               style={{background: cardBackUrl, backgroundSize: '185px 260px', borderRadius: '10px'}}>
-            {[0,1,2,3].map( v =>
-              <span className={'rotate'}></span>
-            )}
-          </div>
+      <div className={cardClass}>
+        <div className='card-face front'
+             style={{background: cardFrontUrl, backgroundSize: bs, borderRadius: br}}>
+          <Rotator />
+          <Rotator />
+          <Rotator />
+          <Rotator />
+        </div>
+        <div className='card-face back'
+             style={{background: cardBackUrl, backgroundSize: bs, borderRadius: br}}>
+          <Rotator />
+          <Rotator />
+          <Rotator />
+          <Rotator />
         </div>
       </div>
     )

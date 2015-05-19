@@ -7,7 +7,11 @@ class PlayingCard < ActiveRecord::Base
   has_many :faces
   has_many :decks, through: :faces
 
-  def self.main_cards
+  def self.main
     where(extra: false)
+  end
+
+  def self.extra
+    where(extra: true)
   end
 end

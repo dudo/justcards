@@ -5,7 +5,7 @@ ruby '2.2.2'
 gem 'rails', '4.2.0' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'sprockets'
 gem 'sprockets-es6', require: 'sprockets/es6'
-# gem 'thin'
+gem 'thin'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 
