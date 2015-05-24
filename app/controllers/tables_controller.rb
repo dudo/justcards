@@ -5,8 +5,47 @@ class TablesController < ApplicationController
 
   def show
     @table = Table.find(params[:id])
+    @game = {start_area: 'draw'}
     @deck = Deck.first
-    @measurements = @deck.attributes.with_indifferent_access.slice(:name, :rotation_matters, :height_px, :width_px, :border_radius_px).as_json
-    @cards = @deck.playing_cards.main.order("RANDOM()").select(:id, :name, :display_name, :extra).as_json
+    @measurements = @deck.attributes.with_indifferent_access.slice(:name, :rotation_matters, :height_px, :width_px, :border_radius_px)
+    @cards = @deck.playing_cards.main.select(:id, :name, :display_name, :extra)
+    @areas = [
+      {id: 1, name: 'draw', position_x: 30, position_y: 24, face_up: false},
+      {id: 2, name: 'play', position_x: 45, position_y: 24, face_up: true},
+    ]
+    @players = [ # players.sort(:player_order) then rearrange so current user is first
+      {id: 1, name: 'foo', play_order: 1, current_user: true,
+        areas: [
+          {id: 3, name: 'hand', face_up: false}
+        ]
+      },{id: 3, name: 'baz', play_order: 2,
+        areas: [
+          {id: 4, name: 'hand', face_up: false}
+        ]
+      },{id: 4, name: 'qux', play_order: 3,
+        areas: [
+          {id: 5, name: 'hand', face_up: false}
+        ]
+      },{id: 2, name: 'bar', play_order: 0,
+        areas: [
+          {id: 6, name: 'hand', face_up: false}
+        ]
+      },{id: 8, name: 'bar', play_order: 0,
+        areas: [
+          {id: 6, name: 'hand', face_up: false}
+        ]
+      },{id: 9, name: 'bar', play_order: 0,
+        areas: [
+          {id: 6, name: 'hand', face_up: false}
+        ]
+      }
+    ]
+    @match = {
+      game: @game,
+      cards: @cards,
+      measurements: @measurements,
+      areas: @areas,
+      players: @players
+    }.as_json
   end
 end
