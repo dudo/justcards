@@ -18,3 +18,7 @@
 //= require react_ujs
 //= require components
 //= require_tree .
+
+
+
+// Draggable.hitTest(element1, element2, 20)

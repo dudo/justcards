@@ -38,7 +38,26 @@ class CardWrapper {
       edgeResistance: 0.8,
       onPress: function(){ node.classList.add('selected') },
       onRelease: function(){ node.classList.remove('selected') },
-      onClick: function(){ component.flip(node) }
+      onClick: function(){ component.flip(node) },
+      onDragEnd: function(){
+        var plusOrMinus = Math.random() < 0.5 ? -1 : 1,
+            toppish = Math.floor(Math.random() * 10) * plusOrMinus,
+            leftish = Math.floor(Math.random() * 10) * plusOrMinus,
+            spin = Math.floor(Math.random() * 20) * plusOrMinus + '_short'
+        var areas = document.querySelectorAll('.area')
+        for (var i = areas.length; i--;) {
+          var area = Draggable.get('#'+areas[i].id),
+              x = areas[i].offsetLeft + component.props.width_px*0.1 + area.x,
+              y = areas[i].offsetTop + component.props.height_px*0.1 + area.y
+          node.classList.remove(areas[i].id)
+          // TODO there is a bug here where a card can have overlap and get 2 classes added
+          if (this.hitTest('#'+areas[i].id, '20%')) {
+            TweenLite.to(node, 0.3, {x: x+leftish, y: y+toppish, rotation: spin})
+            node.classList.add(areas[i].id)
+            node.classList.remove('player')
+          }
+        }
+      }
     })[0]
 
     Draggable.create(node, {
@@ -57,8 +76,8 @@ class CardWrapper {
 
   render() {
     var cardClass = 'card-wrapper '
-    var a = Math.random() < 0.5 ? 'play' : 'draw'
-    cardClass += a
+    // var a = Math.random() < 0.5 ? 'play' : 'draw'
+    // cardClass += a
 
     var w = this.props.width_px + 'px'
     var h = this.props.height_px + 'px'

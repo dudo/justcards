@@ -26,20 +26,21 @@ class TablesController < ApplicationController
         areas: [
           {id: 5, name: 'hand', face_up: false}
         ]
-      },{id: 2, name: 'bar', play_order: 0,
+      },{id: 2, name: 'bar', play_order: 6,
         areas: [
           {id: 6, name: 'hand', face_up: false}
         ]
-      },{id: 8, name: 'bar', play_order: 0,
+      },{id: 8, name: 'bar', play_order: 5,
         areas: [
-          {id: 6, name: 'hand', face_up: false}
+          {id: 7, name: 'hand', face_up: false}
         ]
-      },{id: 9, name: 'bar', play_order: 0,
+      },{id: 9, name: 'bar', play_order: 4,
         areas: [
-          {id: 6, name: 'hand', face_up: false}
+          {id: 8, name: 'hand', face_up: false}
         ]
       }
     ]
+
     @match = {
       game: @game,
       cards: @cards,

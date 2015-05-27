@@ -27,7 +27,7 @@ class Table {
     })
 
     setTimeout( () => {
-      this.dealCards(this.shuffleCards())
+      // this.dealCards(this.shuffleCards())
     }, 2000)
   }
 
@@ -52,7 +52,11 @@ class Table {
           spin = Math.floor(Math.random() * 20) * plusOrMinus
 
       tl.to(card, 0.5, {x: x+leftish, y: y+toppish, rotation: degrees+90+spin}, 0.1*i)
+      card.classList.add('player')
     }
+  }
+
+  multiSelect() {
 
   }
 
@@ -68,16 +72,22 @@ class Table {
   }
 
   render() {
-    var { name, ...measurements} = this.props.measurements
+    var { name, ...measurements } = this.props.measurements
 
     return (
-      <div id='table'>
-        { this.props.players.map( p =>
-          <Player key={p.id} {...p} />
-        )}
-
+      <div id='table'
+           onDragStart={this.multiSelect()}>
         { this.props.areas.map( a =>
           <Area key={a.id} {...a} {...measurements} />
+        )}
+
+        { this.props.players.map( (p, i) =>
+          <Player
+            key={p.id}
+            index={i}
+            total_players={this.props.players.length}
+            board_square={Math.min(window.innerWidth, window.innerHeight)}
+            {...p} {...measurements} />
         )}
 
         { this.shuffleCards().map( c =>

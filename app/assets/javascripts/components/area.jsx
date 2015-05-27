@@ -17,7 +17,7 @@ class Area {
         })
       },
       onRelease: function(){
-        cards.map( c => c.update(true).disable())
+        // cards.map( c => c.update(true).disable())
         node.style.zIndex = '0'
       },
       edgeResistance: 0.8
@@ -31,6 +31,7 @@ class Area {
     var t = this.props.position_y + '%'
     var l = this.props.position_x + '%'
     var br = this.props.border_radius_px * 1.2
+
     return (
       <div className={areaClass}
            id={this.props.name}
@@ -44,3 +45,7 @@ class Area {
     )
   }
 }
+
+
+
+

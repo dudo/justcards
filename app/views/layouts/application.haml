@@ -5,5 +5,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    - set_meta_tags viewport: 'width=device-width, initial-scale=1.0, user-scalable=no'
+    = display_meta_tags
   %body
     = yield
+
+
