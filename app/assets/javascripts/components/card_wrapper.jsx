@@ -43,18 +43,21 @@ class CardWrapper {
         var plusOrMinus = Math.random() < 0.5 ? -1 : 1,
             toppish = Math.floor(Math.random() * 10) * plusOrMinus,
             leftish = Math.floor(Math.random() * 10) * plusOrMinus,
-            spin = Math.floor(Math.random() * 20) * plusOrMinus + '_short'
+            spin = Math.floor(Math.random() * 20) * plusOrMinus
         var areas = document.querySelectorAll('.area')
         for (var i = areas.length; i--;) {
           var area = Draggable.get('#'+areas[i].id),
-              x = areas[i].offsetLeft + component.props.width_px*0.1 + area.x,
-              y = areas[i].offsetTop + component.props.height_px*0.1 + area.y
+              x = parseInt(areas[i].dataset.x) + area.x,
+              y = parseInt(areas[i].dataset.y) + area.y,
+              r = parseInt(areas[i].dataset.rotation)+spin+'_short'
           node.classList.remove(areas[i].id)
           // TODO there is a bug here where a card can have overlap and get 2 classes added
           if (this.hitTest('#'+areas[i].id, '20%')) {
-            TweenLite.to(node, 0.3, {x: x+leftish, y: y+toppish, rotation: spin})
+            TweenLite.to(node, 0.3, {x: x+leftish, y: y+toppish, rotation: r})
             node.classList.add(areas[i].id)
-            node.classList.remove('player')
+            // node.classList.remove('player')
+      console.log( 'x: '+x+', y: '+y+', spin: '+r+', player: '+areas[i].id )
+
           }
         }
       }

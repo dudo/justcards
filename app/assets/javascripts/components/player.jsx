@@ -1,4 +1,27 @@
 class Player {
+  componentDidMount() {
+    var node = React.findDOMNode(this)
+    var cards = Draggable.create('.card-wrapper', {
+      bounds: '#table',
+      zIndexBoost: false,
+    })
+    cards.map( c => c.disable())
+    Draggable.create(node, {
+      trigger: node,
+      bounds: '#table',
+      onPress: (event) => {
+        cards.map( c => {
+          var items = new Set(c.target.classList)
+          if (items.has(this.props.name)) { c.enable().startDrag(event) }
+        })
+      },
+      onRelease: function(){
+        // cards.map( c => c.update(true).disable())
+        node.style.zIndex = '0'
+      },
+      edgeResistance: 0.8
+    })
+  }
 
   render() {
     var playerClass = 'player area'
@@ -23,7 +46,10 @@ class Player {
                    width: this.props.width_px * 1.2,
                    height: this.props.height_px * 1.2,
                    borderRadius: this.props.border_radius_px * 1.2,
-                   transform: rotation}}>
+                   transform: rotation}}
+            data-x={x+this.props.width_px*0.1}
+            data-y={y+this.props.height_px*0.1}
+            data-rotation={degrees-90}>
         <p>{this.props.name}</p>
       </div>
     )

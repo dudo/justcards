@@ -10,8 +10,8 @@ class TablesController < ApplicationController
     @measurements = @deck.attributes.with_indifferent_access.slice(:name, :rotation_matters, :height_px, :width_px, :border_radius_px)
     @cards = @deck.playing_cards.main.select(:id, :name, :display_name, :extra)
     @areas = [
-      {id: 1, name: 'draw', position_x: 30, position_y: 24, face_up: false},
-      {id: 2, name: 'play', position_x: 45, position_y: 24, face_up: true},
+      {id: 1, name: 'draw', position_x: 260, position_y: 250, face_up: false},
+      {id: 2, name: 'play', position_x: 380, position_y: 250, face_up: true},
     ]
     @players = [ # players.sort(:player_order) then rearrange so current user is first
       {id: 1, name: 'foo', play_order: 1, current_user: true,
@@ -30,11 +30,11 @@ class TablesController < ApplicationController
         areas: [
           {id: 6, name: 'hand', face_up: false}
         ]
-      },{id: 8, name: 'bar', play_order: 5,
+      },{id: 8, name: 'bbar', play_order: 5,
         areas: [
           {id: 7, name: 'hand', face_up: false}
         ]
-      },{id: 9, name: 'bar', play_order: 4,
+      },{id: 9, name: 'ffoo', play_order: 4,
         areas: [
           {id: 8, name: 'hand', face_up: false}
         ]

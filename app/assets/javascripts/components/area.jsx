@@ -22,14 +22,13 @@ class Area {
       },
       edgeResistance: 0.8
     })
-
   }
 
   render() {
     var areaClass = 'area'
     if (this.props.face_up) { areaClass += ' face-up' }
-    var t = this.props.position_y + '%'
-    var l = this.props.position_x + '%'
+    var t = this.props.position_y
+    var l = this.props.position_x
     var br = this.props.border_radius_px * 1.2
 
     return (
@@ -39,7 +38,10 @@ class Area {
                    left: l,
                    width: this.props.width_px * 1.2,
                    height:  this.props.height_px * 1.2,
-                   borderRadius: br}}>
+                   borderRadius: br}}
+           data-x={l+this.props.width_px*0.1}
+           data-y={t+this.props.height_px*0.1}
+           data-rotation={0}>
         <p>{this.props.name}</p>
       </div>
     )

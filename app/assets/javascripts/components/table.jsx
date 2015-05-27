@@ -27,32 +27,28 @@ class Table {
     })
 
     setTimeout( () => {
-      // this.dealCards(this.shuffleCards())
+      this.dealCards(cards)
     }, 2000)
   }
 
-  dealCards() {
-    var cards = document.querySelectorAll('.card-wrapper'),
-        player_count = this.props.players.length,
-        board = Math.min(window.innerWidth, window.innerHeight),
-        card_size = Math.max(this.props.measurements.width_px, this.props.measurements.height_px),
-        radius = board/2 - card_size*2/3
+  dealCards(cards) {
+    var total_players = this.props.players.length
     var tl = new TimelineLite()
 
     for (var i = parseInt(cards.length); i--;) {
       var card = cards[i],
-          player = i%player_count + 1,
-          degrees = 360/player_count*player-90,
-          radians = Math.PI * degrees/180,
-          x = Math.cos(radians) * radius + radius + card_size/3,
-          y = Math.sin(radians) * radius + radius + card_size/6
+          turn = i%total_players,
+          player = document.querySelector('#'+this.props.players[turn].name),
+          x = parseInt(player.dataset.x),
+          y = parseInt(player.dataset.y)
       var plusOrMinus = Math.random() < 0.5 ? -1 : 1,
           toppish = Math.floor(Math.random() * 10) * plusOrMinus,
           leftish = Math.floor(Math.random() * 10) * plusOrMinus,
-          spin = Math.floor(Math.random() * 20) * plusOrMinus
-
-      tl.to(card, 0.5, {x: x+leftish, y: y+toppish, rotation: degrees+90+spin}, 0.1*i)
-      card.classList.add('player')
+          spin = Math.floor(Math.random() * 20) * plusOrMinus,
+          r = parseInt(player.dataset.rotation)+spin+'_short'
+      // console.log( 'x: '+x+', y: '+y+', spin: '+r+', player: '+player.id )
+      tl.to(card, 0.5, {x: x+leftish, y: y+toppish, rotation: r}, 0.1*i)
+      card.classList.add(player.id)
     }
   }
 
