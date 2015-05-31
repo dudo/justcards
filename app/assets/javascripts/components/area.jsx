@@ -10,13 +10,13 @@ class Area {
     Draggable.create(node, {
       trigger: node,
       bounds: '#table',
-      onPress: (event) => {
+      onDragStart: (event) => {
         cards.map( c => {
           var items = new Set(c.target.classList)
           if (items.has(this.props.name)) { c.enable().startDrag(event) }
         })
       },
-      onRelease: function(){
+      onDragEnd: function(){
         // cards.map( c => c.update(true).disable())
         node.style.zIndex = '0'
       },

@@ -56,7 +56,7 @@ class CardWrapper {
             TweenLite.to(node, 0.3, {x: x+leftish, y: y+toppish, rotation: r})
             node.classList.add(areas[i].id)
             // node.classList.remove('player')
-      console.log( 'x: '+x+', y: '+y+', spin: '+r+', player: '+areas[i].id )
+      // console.log( 'x: '+x+', y: '+y+', spin: '+r+', player: '+areas[i].id )
 
           }
         }

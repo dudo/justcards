@@ -18,6 +18,14 @@ class Table {
     }
   }
 
+  current_user_index() {
+    var c
+    this.props.players.map( (p,i) => {
+      if (p.user_id == this.props.current_user.id) {c = i}
+    })
+    return c
+  }
+
   componentDidMount() {
     var cards = document.querySelectorAll('.card-wrapper')
 
@@ -27,11 +35,11 @@ class Table {
     })
 
     setTimeout( () => {
-      this.dealCards(cards)
+      this.deal(cards)
     }, 2000)
   }
 
-  dealCards(cards) {
+  deal(cards) {
     var total_players = this.props.players.length
     var tl = new TimelineLite()
 
@@ -79,9 +87,10 @@ class Table {
 
         { this.props.players.map( (p, i) =>
           <Player
-            key={p.id}
+            key={p.user_id}
             index={i}
             total_players={this.props.players.length}
+            current_player={this.current_user_index()}
             board_square={Math.min(window.innerWidth, window.innerHeight)}
             {...p} {...measurements} />
         )}
