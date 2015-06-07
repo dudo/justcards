@@ -37,6 +37,31 @@ class Table {
     setTimeout( () => {
       this.deal(cards)
     }, 2000)
+
+  }
+
+  fan(hand) {
+    // var tl = new TimelineLite()
+    var cards = document.querySelectorAll('.card-wrapper.' + hand),
+        area = document.querySelector('#' + hand)
+    var aw0 = area.offsetWidth, // original area width
+        ah0 = area.offsetHeight,
+        ay0 = area.offsetTop,
+        ax0 = area.offsetLeft,
+        cw0 = cards[0].offsetWidth, // card width
+        ch0 = cards[0].offsetHeight,
+        ap0 = (ah0-ch0)/2, // area padding
+        aw1 = ap0*2 + (cards.length-1)*cw0*0.2+cw0,
+        ax1 = (aw0-aw1)/2,
+        cy1 = ay0+ap0
+
+    TweenLite.to(area, 1, {width: aw1, x: ax1})
+
+    for (var i = 0; i < cards.length; i++) {
+      Card.flip(cards[i])
+      var x = ax0+ax1+ap0 + i*cw0*0.2
+      TweenLite.to(cards[i], 1, {rotation: 0, y: cy1, x: x})
+    }
   }
 
   deal(cards) {
@@ -54,14 +79,20 @@ class Table {
           leftish = Math.floor(Math.random() * 10) * plusOrMinus,
           spin = Math.floor(Math.random() * 20) * plusOrMinus,
           r = parseInt(player.dataset.rotation)+spin+'_short'
-      // console.log( 'x: '+x+', y: '+y+', spin: '+r+', player: '+player.id )
-      tl.to(card, 0.5, {x: x+leftish, y: y+toppish, rotation: r}, 0.1*i)
+      // console.log(  )
+      tl.to(card, 0.5, {
+        x: x+leftish,
+        y: y+toppish,
+        rotation: r
+      }, 0.1*i)
       card.classList.add(player.id)
+      Draggable.get(card).update()
     }
-  }
 
-  multiSelect() {
-
+    setTimeout( () => {
+      var current_hand = document.querySelector('.player.current-user')
+      this.fan(current_hand.id)
+    }, 10000)
   }
 
   shuffleCards() {
@@ -79,8 +110,7 @@ class Table {
     var { name, ...measurements } = this.props.measurements
 
     return (
-      <div id='table'
-           onDragStart={this.multiSelect()}>
+      <div id='table'>
         { this.props.areas.map( a =>
           <Area key={a.id} {...a} {...measurements} />
         )}
@@ -96,7 +126,7 @@ class Table {
         )}
 
         { this.shuffleCards().map( c =>
-          <CardWrapper key={c.id} {...c} {...measurements} />
+          <Card key={c.id} {...c} {...measurements} />
         )}
       </div>
     )

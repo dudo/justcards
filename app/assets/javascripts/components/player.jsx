@@ -16,7 +16,6 @@ class Player {
         })
       },
       onRelease: function(){
-        // cards.map( c => c.update(true).disable())
         node.style.zIndex = '0'
       },
       edgeResistance: 0.8
@@ -24,14 +23,14 @@ class Player {
   }
 
   render() {
-    // console.log(this.props.current_player)
-    var playerClass = 'player area'
-    if (this.props.current_player == this.props.index) {playerClass += ' current_user'}
+    var playerClass = ['player', 'area']
+    if (this.props.current_player == this.props.index) { playerClass.push('current-user') }
     var card_size = Math.max(this.props.width_px, this.props.height_px) * 1.2,
         radius = this.props.board_square/2 - card_size*2/3
     var turn = this.props.index%this.props.total_players,
         per = 360/this.props.total_players,
         current_position = per*this.props.current_player,
+        // +90 rotates 0 to the bottom. -current_position gets the current_user to the bottom
         degrees = per*turn+90-current_position,
         radians = Math.PI * degrees/180,
         x = Math.cos(radians) * radius + radius + card_size/3,
@@ -42,7 +41,7 @@ class Player {
     var rotation = 'rotate(' + (degrees-90) + 'deg)'
 
     return (
-      <div className={playerClass}
+      <div className={playerClass.join(' ')}
            id={this.props.name}
            style={{top: y,
                    left: x,
