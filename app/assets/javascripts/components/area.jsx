@@ -79,7 +79,7 @@ class Area {
            data-x={l+this.props.width_px*0.1}
            data-y={t+this.props.height_px*0.1}
            data-rotation={0}>
-        <p>{this.props.name}</p>
+        <p className='name'>{this.props.name}</p>
       </div>
     )
   }

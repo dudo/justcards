@@ -35,7 +35,7 @@ class Table {
     })
 
     setTimeout( () => {
-      this.deal(cards)
+      // this.deal(cards)
     }, 2000)
 
   }

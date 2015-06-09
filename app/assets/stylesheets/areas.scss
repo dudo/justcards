@@ -1,3 +1,42 @@
-// Place all the styles related to the areas controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$cubic-bounce: cubic-bezier(.32,2.04,.85,.54);
+
+.kebab {
+  position: absolute;
+  cursor: pointer;
+  left: 100%;
+  color: white;
+  figure {
+    transition: all 0.25s $cubic-bounce;
+    margin: 0;
+    margin-bottom: -10px;
+    padding-left: 10px;
+  }
+  span {
+    transition: all 0.25s;
+  }
+  span:first-child {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    margin: 3px 0;
+    opacity: 1;
+  }
+  span:nth-child(2) {
+    opacity: 0;
+  }
+  &:hover {
+    figure {
+      margin-bottom: 0px;
+    }
+    span:first-child {
+      left: 10px;
+      opacity: 0;
+    }
+    span:nth-child(2) {
+      opacity: 1;
+      height: initial;
+    }
+  }
+}

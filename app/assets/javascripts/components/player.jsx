@@ -20,11 +20,22 @@ class Player {
       },
       edgeResistance: 0.8
     })
+    this.menus(node)
+  }
+
+  menus(node) {
+    node.querySelector('.kebab').addEventListener('click', function() {
+      var dots = this.querySelectorAll('figure')
+      for(var i=dots.length; i--;) {
+        dots[i].classList.toggle('active')
+      }
+    }, false)
   }
 
   render() {
+    var current_player = this.props.current_player == this.props.index
     var playerClass = ['player', 'area']
-    if (this.props.current_player == this.props.index) { playerClass.push('current-user') }
+    if (current_player) { playerClass.push('current-user') }
     var card_size = Math.max(this.props.width_px, this.props.height_px) * 1.2,
         radius = this.props.board_square/2 - card_size*2/3
     var turn = this.props.index%this.props.total_players,
@@ -52,11 +63,18 @@ class Player {
             data-x={x+this.props.width_px*0.1}
             data-y={y+this.props.height_px*0.1}
             data-rotation={degrees-90}>
-        <p>{this.props.name}</p>
+        <p className='name'>{this.props.name}</p>
+        <div className='kebab'>
+          <figure><span></span><span>foo</span></figure>
+          <figure><span></span><span>bar</span></figure>
+          <figure><span></span><span>baz</span></figure>
+        </div>
       </div>
     )
   }
 }
+
+
 
 
 
